@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Notes</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Home Button -->
+    <a href="/" class="home-button">
+        Home
+    </a>
+
+    <h1>My Notes</h1>
+
+    <p class="page-description">
+        Here are my saved notes.
+    </p>
+
+
+    <!-- Notes List -->
+
+    <div class="notes-list">
+
+        {% for note in notes %}
+
+        <div class="note-card">
+
+            <!-- Note Content -->
+
+            <div class="note-content">
+                {{ note[1] }}
+            </div>
+
+
+            <!-- Actions -->
+
+            <div class="note-actions">
+
+                <a href="/edit-note/{{ note[0] }}">
+                    <button type="button">
+                        Edit
+                    </button>
+                </a>
+
+
+                <form action="/delete-note/{{ note[0] }}"
+                      method="POST">
+
+                    <button type="submit">
+                        Delete
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+
+</html>

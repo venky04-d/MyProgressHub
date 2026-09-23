@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Progress</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <h1>My Learning Progress</h1>
+
+    <p class="page-description">
+        Track what I am learning.
+    </p>
+
+    <table class="progress-table">
+
+        <thead>
+            <tr>
+                <th>Technology</th>
+                <th>Topic</th>
+                <th>Progress</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for item in progress %}
+
+            <tr>
+
+                <td>{{ item[1] }}</td>
+
+                <td>{{ item[2] }}</td>
+
+                <td>{{ item[3] }}%</td>
+
+                <td class="actions">
+
+                    <a href="/edit-progress/{{ item[0] }}">
+                        <button type="button">Edit</button>
+                    </a>
+
+                    <form action="/delete-progress/{{ item[0] }}"
+                          method="POST">
+
+                        <button type="submit">Delete</button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+     <a href="/" class="home-button">
+        Home
+    </a>
+
+</body>
+
+</html>

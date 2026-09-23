@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Note</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <h1>Add Note</h1>
+
+    <form action="/add-note"
+          method="POST"
+          class="note-form">
+
+        <textarea name="note"
+                  placeholder="Write your note here..."
+                  rows="8"
+                  required></textarea>
+
+        <button type="submit">
+            Add Note
+        </button>
+
+    </form>
+
+     <a href="/" class="home-button">
+        Home
+    </a>
+
+</body>
+
+</html>

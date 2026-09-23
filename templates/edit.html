@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Task</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Home Button -->
+    <a href="/" class="home-button">
+        Home
+    </a>
+
+    <h1>Edit Task</h1>
+
+    <p class="page-description">
+        Edit your task below.
+    </p>
+
+    <form action="/edit-task/{{ task[0] }}"
+          method="POST"
+          class="add-form">
+
+        <input type="text"
+               name="task"
+               value="{{ task[1] }}"
+               placeholder="Enter your task"
+               required>
+
+        <button type="submit">
+            Save Changes
+        </button>
+
+    </form>
+
+</body>
+
+</html>

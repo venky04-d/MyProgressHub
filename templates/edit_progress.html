@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Progress</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Home Button -->
+    <a href="/" class="home-button">
+        Home
+    </a>
+
+    <h1>Edit Progress</h1>
+
+    <p class="page-description">
+        Update your learning progress.
+    </p>
+
+    <form action="/edit-progress/{{ item[0] }}"
+          method="POST"
+          class="progress-form">
+
+        <input type="text"
+               name="technology"
+               value="{{ item[1] }}"
+               placeholder="Technology"
+               required>
+
+        <input type="text"
+               name="topic"
+               value="{{ item[2] }}"
+               placeholder="Topic"
+               required>
+
+        <input type="number"
+               name="progress"
+               value="{{ item[3] }}"
+               placeholder="Progress %"
+               min="0"
+               max="100"
+               required>
+
+        <button type="submit">
+            Save Changes
+        </button>
+
+    </form>
+
+</body>
+
+</html>

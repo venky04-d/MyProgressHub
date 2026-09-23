@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Task</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+	
+    <a href="/" class="home-button">
+        Home
+    </a>
+
+    <h1>Add Task</h1>
+
+    <form action="/add-task"
+          method="POST"
+          class="add-form">
+
+        <input type="text"
+               name="task"
+               placeholder="Enter your task"
+               required>
+
+        <button type="submit">
+            Add Task
+        </button>
+
+    </form>
+
+
+</body>
+
+</html>

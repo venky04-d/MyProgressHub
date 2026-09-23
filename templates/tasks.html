@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Tasks</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Home Button -->
+    <a href="/" class="home-button">
+        Home
+    </a>
+
+    <h1>My Tasks</h1>
+
+    <p class="page-description">
+        Here are the tasks I am working on.
+    </p>
+
+
+    <!-- Task Filters -->
+
+    <div class="task-filters">
+
+        <button type="button"
+                onclick="showTasks('all')">
+            All
+        </button>
+
+        <button type="button"
+                onclick="showTasks('pending')">
+            Pending
+        </button>
+
+        <button type="button"
+                onclick="showTasks('completed')">
+            Completed
+        </button>
+
+    </div>
+
+
+    <!-- Task List -->
+
+    <div class="item-list">
+
+        {% for task in tasks %}
+
+        <div class="item-card"
+             data-completed="{{ task[2] }}">
+
+            <!-- Checkbox -->
+
+            <form action="/complete-task/{{ task[0] }}"
+                  method="POST"
+                  class="task-check"
+                  onsubmit="completeTask(event, this)">
+
+                <input type="checkbox"
+                       {% if task[2] == 1 %}checked{% endif %}>
+
+            </form>
+
+
+            <!-- Task Name -->
+
+            <strong class="{% if task[2] == 1 %}completed-task{% endif %}">
+                {{ task[1] }}
+            </strong>
+
+
+            <!-- Actions -->
+
+            <div class="actions">
+
+                <a href="/edit-task/{{ task[0] }}">
+                    <button type="button">
+                        Edit
+                    </button>
+                </a>
+
+
+                <form action="/delete-task/{{ task[0] }}"
+                      method="POST">
+
+                    <button type="submit">
+                        Delete
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- Task Completion Script -->
+
+    <script>
+
+    function completeTask(event, form) {
+
+        event.preventDefault();
+
+        fetch(form.action, {
+            method: "POST"
+        });
+
+        const checkbox = form.querySelector("input");
+
+        const task =
+            form.parentElement.querySelector("strong");
+
+        const card =
+            form.parentElement;
+
+        if (checkbox.checked) {
+
+            task.classList.add("completed-task");
+
+            card.dataset.completed = "1";
+
+        } else {
+
+            task.classList.remove("completed-task");
+
+            card.dataset.completed = "0";
+
+        }
+
+    }
+
+
+    /* Task Filters */
+
+    function showTasks(type) {
+
+        const tasks =
+            document.querySelectorAll(".item-card");
+
+        tasks.forEach(task => {
+
+            const completed =
+                task.dataset.completed === "1";
+
+
+            if (type === "all") {
+
+                task.style.display = "flex";
+
+            }
+
+
+            else if (type === "pending") {
+
+                task.style.display =
+                    completed ? "none" : "flex";
+
+            }
+
+
+            else if (type === "completed") {
+
+                task.style.display =
+                    completed ? "flex" : "none";
+
+            }
+
+        });
+
+    }
+
+    </script>
+
+</body>
+
+</html>

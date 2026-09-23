@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Progress</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Home Button -->
+    <a href="/" class="home-button">
+        Home
+    </a>
+
+    <h1>Add Progress</h1>
+
+    <p class="page-description">
+        Track your learning progress.
+    </p>
+
+    <form action="/add-progress"
+          method="POST"
+          class="progress-form">
+
+        <input type="text"
+               name="technology"
+               placeholder="Technology"
+               required>
+
+        <input type="text"
+               name="topic"
+               placeholder="Topic"
+               required>
+
+        <input type="number"
+               name="progress"
+               placeholder="Progress %"
+               min="0"
+               max="100"
+               required>
+
+        <button type="submit">
+            Add Progress
+        </button>
+
+    </form>
+
+</body>
+
+</html>
