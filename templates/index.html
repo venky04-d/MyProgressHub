@@ -1,8 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>My Personal App</title>
+    <meta charset="UTF-8">
+
+    <!-- Important for mobile / Android -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Progress Hub</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
@@ -10,6 +16,7 @@
 
 <body class="home-page">
 
+    <!-- Home Button -->
     <a href="/" class="home-button">
         Home
     </a>
@@ -17,9 +24,7 @@
     <!-- Logo -->
     <img src="{{ url_for('static', filename='logo.png') }}"
          class="app-logo"
-         alt="CD Logo">
-
-    <div id="sphere-container"></div>
+         alt="My Progress Hub Logo">
 
     <!-- Main Heading -->
     <h1>Welcome to My Progress Hub</h1>
@@ -33,7 +38,10 @@
     <div class="dashboard">
 
 
-        <!-- My Tasks -->
+        <!-- =========================
+             MY TASKS
+        ========================== -->
+
         <div class="section">
 
             <h2>My Tasks</h2>
@@ -41,6 +49,9 @@
             <p>
                 Here I am learning web development.
             </p>
+
+
+            <!-- Task Summary -->
 
             <div class="task-summary">
 
@@ -58,22 +69,36 @@
 
             </div>
 
+
+            <!-- Add Task -->
+
             <a href="/add-task-page">
+
                 <button type="button">
                     Add Task
                 </button>
+
             </a>
 
+
+            <!-- View Tasks -->
+
             <a href="/tasks">
+
                 <button type="button">
                     View Tasks
                 </button>
+
             </a>
 
         </div>
 
 
-        <!-- My Notes -->
+
+        <!-- =========================
+             MY NOTES
+        ========================== -->
+
         <div class="section">
 
             <h2>My Notes</h2>
@@ -82,22 +107,36 @@
                 Here I can write my notes.
             </p>
 
+
+            <!-- Add Note -->
+
             <a href="/add-note-page">
+
                 <button type="button">
                     Add Note
                 </button>
+
             </a>
 
+
+            <!-- View Notes -->
+
             <a href="/notes">
+
                 <button type="button">
                     View Notes
                 </button>
+
             </a>
 
         </div>
 
 
-        <!-- My Progress -->
+
+        <!-- =========================
+             MY PROGRESS
+        ========================== -->
+
         <div class="section">
 
             <h2>My Progress</h2>
@@ -106,6 +145,9 @@
                 Here I can track my learning progress.
             </p>
 
+
+            <!-- Progress Information -->
+
             <div class="home-progress">
 
                 {% for item in progress %}
@@ -113,14 +155,26 @@
                 <div class="home-progress-item">
 
                     <div class="home-progress-title">
-                        <strong>{{ item[1] }}</strong>
-                        <span>{{ item[3] }}%</span>
+
+                        <strong>
+                            {{ item[1] }}
+                        </strong>
+
+                        <span>
+                            {{ item[3] }}%
+                        </span>
+
                     </div>
 
+
+                    <!-- Progress Bar -->
+
                     <div class="progress-bar">
+
                         <div class="progress-fill"
                              style="width: {{ item[3] }}%;">
                         </div>
+
                     </div>
 
                 </div>
@@ -129,16 +183,26 @@
 
             </div>
 
+
+            <!-- Add Progress -->
+
             <a href="/add-progress-page">
+
                 <button type="button">
                     Add Progress
                 </button>
+
             </a>
 
+
+            <!-- View Progress -->
+
             <a href="/progress">
+
                 <button type="button">
                     View Progress
                 </button>
+
             </a>
 
         </div>
@@ -146,103 +210,9 @@
     </div>
 
 
+    <!-- JavaScript -->
+
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <script>
-
-        const scene = new THREE.Scene();
-
-        const camera = new THREE.PerspectiveCamera(
-            45,
-            1,
-            0.1,
-            1000
-        );
-
-        const renderer = new THREE.WebGLRenderer({
-            alpha: true,
-            antialias: true
-        });
-
-        renderer.setSize(300, 300);
-
-        document
-            .getElementById("sphere-container")
-            .appendChild(renderer.domElement);
-
-
-        // Create smaller sphere
-
-        const geometry = new THREE.SphereGeometry(
-            1.3,
-            64,
-            64
-        );
-
-
-        // Sphere material
-
-        const material = new THREE.MeshStandardMaterial({
-            color: 0x168cff,
-            metalness: 0.5,
-            roughness: 0.25
-        });
-
-
-        const sphere = new THREE.Mesh(
-            geometry,
-            material
-        );
-
-        scene.add(sphere);
-
-
-        // Lighting
-
-        const light = new THREE.PointLight(
-            0xffffff,
-            2
-        );
-
-        light.position.set(5, 5, 5);
-
-        scene.add(light);
-
-
-        const ambientLight = new THREE.AmbientLight(
-            0xffffff,
-            0.6
-        );
-
-        scene.add(ambientLight);
-
-
-        // Camera
-
-        camera.position.z = 6;
-
-
-        // Rotation
-
-        function animate() {
-
-            requestAnimationFrame(animate);
-
-            sphere.rotation.y += 0.01;
-
-            sphere.rotation.x += 0.002;
-
-            renderer.render(
-                scene,
-                camera
-            );
-        }
-
-        animate();
-
-    </script>
 
 </body>
 
