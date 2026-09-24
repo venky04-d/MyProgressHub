@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>My Tasks</title>
 
     <link rel="stylesheet"
@@ -23,7 +28,6 @@
 
 
     <!-- Task Filters -->
-
     <div class="task-filters">
 
         <button type="button"
@@ -45,7 +49,6 @@
 
 
     <!-- Task List -->
-
     <div class="item-list">
 
         {% for task in tasks %}
@@ -54,27 +57,25 @@
              data-completed="{{ task[2] }}">
 
             <!-- Checkbox -->
-
             <form action="/complete-task/{{ task[0] }}"
                   method="POST"
                   class="task-check"
                   onsubmit="completeTask(event, this)">
 
                 <input type="checkbox"
+                       onchange="this.form.requestSubmit()"
                        {% if task[2] == 1 %}checked{% endif %}>
 
             </form>
 
 
             <!-- Task Name -->
-
             <strong class="{% if task[2] == 1 %}completed-task{% endif %}">
                 {{ task[1] }}
             </strong>
 
 
             <!-- Actions -->
-
             <div class="actions">
 
                 <a href="/edit-task/{{ task[0] }}">
@@ -82,7 +83,6 @@
                         Edit
                     </button>
                 </a>
-
 
                 <form action="/delete-task/{{ task[0] }}"
                       method="POST">
@@ -102,81 +102,90 @@
     </div>
 
 
-    <!-- Task Completion Script -->
-
+    <!-- JavaScript -->
     <script>
 
-    function completeTask(event, form) {
+        /* Complete / Uncomplete Task */
 
-        event.preventDefault();
+        async function completeTask(event, form) {
 
-        fetch(form.action, {
-            method: "POST"
-        });
+            event.preventDefault();
 
-        const checkbox = form.querySelector("input");
+            const checkbox = form.querySelector("input");
+            const card = form.closest(".item-card");
+            const task = card.querySelector("strong");
 
-        const task =
-            form.parentElement.querySelector("strong");
+            try {
 
-        const card =
-            form.parentElement;
+                const response = await fetch(form.action, {
+                    method: "POST"
+                });
 
-        if (checkbox.checked) {
+                if (response.ok) {
 
-            task.classList.add("completed-task");
+                    if (checkbox.checked) {
 
-            card.dataset.completed = "1";
+                        task.classList.add("completed-task");
+                        card.dataset.completed = "1";
 
-        } else {
+                    } else {
 
-            task.classList.remove("completed-task");
+                        task.classList.remove("completed-task");
+                        card.dataset.completed = "0";
 
-            card.dataset.completed = "0";
+                    }
 
+                } else {
+
+                    // Return checkbox to previous state
+                    checkbox.checked = !checkbox.checked;
+
+                }
+
+            } catch (error) {
+
+                console.log("Error updating task:", error);
+
+                // Return checkbox to previous state
+                checkbox.checked = !checkbox.checked;
+            }
         }
 
-    }
 
+        /* Task Filters */
 
-    /* Task Filters */
+        function showTasks(type) {
 
-    function showTasks(type) {
+            const tasks =
+                document.querySelectorAll(".item-card");
 
-        const tasks =
-            document.querySelectorAll(".item-card");
+            tasks.forEach(task => {
 
-        tasks.forEach(task => {
+                const completed =
+                    task.dataset.completed === "1";
 
-            const completed =
-                task.dataset.completed === "1";
+                if (type === "all") {
 
+                    task.style.display = "flex";
 
-            if (type === "all") {
+                }
 
-                task.style.display = "flex";
+                else if (type === "pending") {
 
-            }
+                    task.style.display =
+                        completed ? "none" : "flex";
 
+                }
 
-            else if (type === "pending") {
+                else if (type === "completed") {
 
-                task.style.display =
-                    completed ? "none" : "flex";
+                    task.style.display =
+                        completed ? "flex" : "none";
 
-            }
+                }
 
-
-            else if (type === "completed") {
-
-                task.style.display =
-                    completed ? "flex" : "none";
-
-            }
-
-        });
-
-    }
+            });
+        }
 
     </script>
 
