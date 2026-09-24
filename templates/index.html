@@ -9,15 +9,16 @@
 </head>
 
 <body class="home-page">
-	
-	<a href="/" class="home-button">
-    Home
-</a>	
+
+    <a href="/" class="home-button">
+        Home
+    </a>
+
     <!-- Logo -->
     <img src="{{ url_for('static', filename='logo.png') }}"
          class="app-logo"
          alt="CD Logo">
-    
+
     <div id="sphere-container"></div>
 
     <!-- Main Heading -->
@@ -40,23 +41,23 @@
             <p>
                 Here I am learning web development.
             </p>
-	    
+
             <div class="task-summary">
 
-    <span>
-        Total: {{ total_tasks }}
-    </span>
+                <span>
+                    Total: {{ total_tasks }}
+                </span>
 
-    <span>
-        Completed: {{ completed_tasks }}
-    </span>
+                <span>
+                    Completed: {{ completed_tasks }}
+                </span>
 
-    <span>
-        Pending: {{ pending_tasks }}
-    </span>
+                <span>
+                    Pending: {{ pending_tasks }}
+                </span>
 
-</div>
-	    
+            </div>
+
             <a href="/add-task-page">
                 <button type="button">
                     Add Task
@@ -104,29 +105,29 @@
             <p>
                 Here I can track my learning progress.
             </p>
-	
-        <div class="home-progress">
 
-    {% for item in progress %}
+            <div class="home-progress">
 
-    <div class="home-progress-item">
+                {% for item in progress %}
 
-        <div class="home-progress-title">
-            <strong>{{ item[1] }}</strong>
-            <span>{{ item[3] }}%</span>
-        </div>
+                <div class="home-progress-item">
 
-        <div class="progress-bar">
-            <div class="progress-fill"
-                 style="width: {{ item[3] }}%;">
+                    <div class="home-progress-title">
+                        <strong>{{ item[1] }}</strong>
+                        <span>{{ item[3] }}%</span>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div class="progress-fill"
+                             style="width: {{ item[3] }}%;">
+                        </div>
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
             </div>
-        </div>
-
-    </div>
-
-    {% endfor %}
-
-</div>
 
             <a href="/add-progress-page">
                 <button type="button">
@@ -147,101 +148,101 @@
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-<script>
+    <script>
 
-const scene = new THREE.Scene();
+        const scene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(
-    45,
-    1,
-    0.1,
-    1000
-);
+        const camera = new THREE.PerspectiveCamera(
+            45,
+            1,
+            0.1,
+            1000
+        );
 
-const renderer = new THREE.WebGLRenderer({
-    alpha: true,
-    antialias: true
-});
+        const renderer = new THREE.WebGLRenderer({
+            alpha: true,
+            antialias: true
+        });
 
-renderer.setSize(300, 300);
+        renderer.setSize(300, 300);
 
-document
-    .getElementById("sphere-container")
-    .appendChild(renderer.domElement);
-
-
-// Create sphere
-
-const geometry = new THREE.SphereGeometry(
-    2,
-    64,
-    64
-);
+        document
+            .getElementById("sphere-container")
+            .appendChild(renderer.domElement);
 
 
-// Sphere material
+        // Create smaller sphere
 
-const material = new THREE.MeshStandardMaterial({
-    color: 0x168cff,
-    metalness: 0.5,
-    roughness: 0.25
-});
-
-
-const sphere = new THREE.Mesh(
-    geometry,
-    material
-);
-
-scene.add(sphere);
+        const geometry = new THREE.SphereGeometry(
+            1.3,
+            64,
+            64
+        );
 
 
-// Lighting
+        // Sphere material
 
-const light = new THREE.PointLight(
-    0xffffff,
-    2
-);
-
-light.position.set(5, 5, 5);
-
-scene.add(light);
+        const material = new THREE.MeshStandardMaterial({
+            color: 0x168cff,
+            metalness: 0.5,
+            roughness: 0.25
+        });
 
 
-const ambientLight = new THREE.AmbientLight(
-    0xffffff,
-    0.6
-);
+        const sphere = new THREE.Mesh(
+            geometry,
+            material
+        );
 
-scene.add(ambientLight);
-
-
-// Camera
-
-camera.position.z = 6;
+        scene.add(sphere);
 
 
-// Rotation
+        // Lighting
 
-function animate() {
+        const light = new THREE.PointLight(
+            0xffffff,
+            2
+        );
 
-    requestAnimationFrame(animate);
+        light.position.set(5, 5, 5);
 
-    sphere.rotation.y += 0.01;
+        scene.add(light);
 
-    sphere.rotation.x += 0.002;
 
-    renderer.render(
-        scene,
-        camera
-    );
-}
+        const ambientLight = new THREE.AmbientLight(
+            0xffffff,
+            0.6
+        );
 
-animate();
+        scene.add(ambientLight);
 
-</script>
+
+        // Camera
+
+        camera.position.z = 6;
+
+
+        // Rotation
+
+        function animate() {
+
+            requestAnimationFrame(animate);
+
+            sphere.rotation.y += 0.01;
+
+            sphere.rotation.x += 0.002;
+
+            renderer.render(
+                scene,
+                camera
+            );
+        }
+
+        animate();
+
+    </script>
 
 </body>
 
