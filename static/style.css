@@ -1027,3 +1027,27 @@ body {
         padding: 6px 9px;
     }
 }
+
+/* =================================
+   MOBILE HOME BUTTON FIX
+================================= */
+
+@media (max-width: 768px) {
+
+    .home-button {
+        position: absolute;
+
+        top: 20px;
+        right: 15px;
+
+        padding: 9px 16px;
+
+        font-size: 14px;
+
+        z-index: 100;
+    }
+
+    .home-page h1 {
+        margin-top: 120px;
+    }
+}
