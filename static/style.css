@@ -758,3 +758,272 @@ body.home-page {
 
     z-index: 10;
 }
+
+/* =================================
+   FIXES + RESPONSIVE DESIGN
+================================= */
+
+/* Prevent width/padding overflow */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+
+/* ================================
+   HOME LOGO - FINAL SIZE
+================================ */
+
+.home-page .app-logo {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+
+    width: 120px;
+    height: 120px;
+
+    object-fit: contain;
+}
+
+
+/* ================================
+   3D SPHERE
+================================ */
+
+#sphere-container {
+    position: absolute;
+
+    top: 20px;
+    right: 30px;
+
+    width: 220px;
+    height: 220px;
+
+    z-index: 10;
+}
+
+#sphere-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+/* ================================
+   NOTES
+================================ */
+
+.notes-list {
+    width: 100%;
+    max-width: 700px;
+    margin: 35px auto;
+}
+
+.note-content {
+    max-height: 180px;
+    overflow-y: auto;
+
+    font-size: 16px;
+    line-height: 1.7;
+    color: #1f2937;
+
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+
+    padding-right: 10px;
+    margin-bottom: 18px;
+}
+
+
+/* ================================
+   TASK LIST
+================================ */
+
+.item-list {
+    width: 100%;
+    max-width: 650px;
+    margin: 35px auto 0;
+}
+
+
+/* ================================
+   PROGRESS CARDS
+================================ */
+
+.progress-card {
+    width: 100%;
+    max-width: 650px;
+}
+
+
+/* ================================
+   NOTE TEXTAREA
+================================ */
+
+.note-form textarea {
+    width: 100%;
+    max-width: 700px;
+}
+
+
+/* ================================
+   MOBILE / ANDROID
+================================ */
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 30px;
+        margin-top: 100px;
+        margin-bottom: 35px;
+    }
+
+    .welcome-text {
+        font-size: 16px;
+        margin-top: -20px;
+        margin-bottom: 30px;
+    }
+
+
+    /* Logo */
+
+    .home-page .app-logo {
+        top: 15px;
+        left: 15px;
+
+        width: 75px;
+        height: 75px;
+    }
+
+
+    /* Sphere */
+
+    #sphere-container {
+        top: 10px;
+        right: 10px;
+
+        width: 110px;
+        height: 110px;
+    }
+
+
+    /* Dashboard */
+
+    .dashboard {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .section {
+        width: 100%;
+        max-width: 350px;
+        padding: 22px;
+    }
+
+
+    /* Home button */
+
+    .home-button {
+        top: 15px;
+        right: 15px;
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+
+    .home-page .home-button {
+        top: 125px;
+    }
+
+
+    /* Forms */
+
+    .add-form,
+    .progress-form,
+    .progress-container form {
+        flex-direction: column !important;
+        width: 100%;
+    }
+
+    .add-form input,
+    .progress-form input,
+    .progress-container form input {
+        width: 100%;
+        max-width: 350px;
+    }
+
+
+    /* Tasks */
+
+    .item-list {
+        width: 100%;
+    }
+
+    .item-card {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .actions {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+
+    /* Notes */
+
+    .notes-list {
+        width: 100%;
+    }
+
+    .note-form textarea {
+        width: 100%;
+        height: 300px;
+    }
+
+    .note-actions {
+        flex-wrap: wrap;
+    }
+
+
+    /* Progress */
+
+    .progress-card {
+        width: 100%;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .progress-info {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .progress-actions {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+
+    /* Task summary */
+
+    .task-summary {
+        gap: 7px;
+    }
+
+    .task-summary span {
+        font-size: 12px;
+        padding: 6px 9px;
+    }
+}
