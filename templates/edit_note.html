@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Edit Note</title>
 
     <link rel="stylesheet"
@@ -10,25 +15,81 @@
 
 <body>
 
+    <!-- Home Button -->
+    <a href="/" class="home-button">
+        Home
+    </a>
+
     <h1>Edit Note</h1>
 
-    <form action="/edit-note/{{ note[0] }}"
-          method="POST"
-          class="note-form">
+    <p class="page-description">
+        Edit your note below.
+    </p>
 
-        <textarea name="note"
-                  rows="10"
-                  required>{{ note[1] }}</textarea>
 
-        <button type="submit">
-            Save Note
+    <!-- Edit Note Form -->
+    <div class="form-card">
+
+        <form action="/edit-note/{{ note[0] }}"
+              method="POST">
+
+            <textarea name="note"
+                      id="note-textarea"
+                      rows="12"
+                      required>{{ note[1] }}</textarea>
+
+            <br>
+
+            <button type="submit">
+                Save Changes
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- Back Button -->
+    <a href="/notes">
+        <button type="button">
+            Back to Notes
         </button>
-
-    </form>
-
-    <a class="back-home" href="/notes">
-        Back to Notes
     </a>
+
+
+    <!-- Tab Indentation -->
+    <script>
+
+        const textarea =
+            document.getElementById("note-textarea");
+
+        textarea.addEventListener("keydown", function(event) {
+
+            if (event.key === "Tab") {
+
+                // Prevent Tab from moving to another element
+                event.preventDefault();
+
+                const start = this.selectionStart;
+                const end = this.selectionEnd;
+
+                // Small indentation = 2 spaces
+                const indent = "  ";
+
+                this.value =
+                    this.value.substring(0, start) +
+                    indent +
+                    this.value.substring(end);
+
+                // Move cursor after indentation
+                this.selectionStart =
+                    this.selectionEnd =
+                    start + indent.length;
+            }
+
+        });
+
+    </script>
 
 </body>
 
