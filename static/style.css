@@ -1068,3 +1068,21 @@ body {
         margin-top: 140px;
     }
 }
+
+/* LARGE NOTE TEXT BOX */
+
+#note-textarea {
+    width: 100%;
+    min-height: 350px;
+    padding: 15px;
+
+    font-size: 16px;
+    line-height: 1.6;
+
+    resize: vertical;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    font-family: Arial, sans-serif;
+}
